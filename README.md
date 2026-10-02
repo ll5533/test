@@ -12,7 +12,12 @@
     python3 -m pricefinder.catalog build              # docs/index.html 생성
     python3 -m unittest discover -s tests -t .        # 테스트
 
-`docs/index.html`은 파일 하나로 완결되어 있어 GitHub Pages 등 어디에나 올릴 수 있습니다.
+`docs/index.html`은 파일 하나로 완결되어 있어 어디에나 올릴 수 있습니다.
+
+## 배포 (GitHub Pages)
+
+`main`에 푸시하면 `.github/workflows/pages.yml`이 테스트와 검증을 거쳐 사이트를 다시 만들어 배포합니다. 즉 `catalog.json`만 고쳐서 올리면 사이트가 갱신됩니다.
+처음 한 번만 저장소 Settings → Pages → Source를 **GitHub Actions**로 바꿔 주세요.
 화면 하단에 제휴 활동 고지 문구가 들어 있으니 지우지 마세요.
 
 ## 참고: 규격 검색 시제품
