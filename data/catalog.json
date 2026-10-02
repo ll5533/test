@@ -1,0 +1,23 @@
+[
+  {"item": "우유", "brand": "매일", "variant": "오리지널", "size": "1L", "count": 1,
+   "name": "매일우유 오리지널 1L",
+   "links": [{"mall": "쿠팡", "url": ""}, {"mall": "네이버", "url": ""}]},
+  {"item": "우유", "brand": "매일", "variant": "오리지널", "size": "500ml", "count": 1,
+   "name": "매일우유 오리지널 500ml",
+   "links": [{"mall": "쿠팡", "url": ""}]},
+  {"item": "우유", "brand": "매일", "variant": "상하목장 유기농", "size": "1L", "count": 1,
+   "name": "매일 상하목장 유기농 우유 1L",
+   "links": [{"mall": "쿠팡", "url": ""}]},
+  {"item": "우유", "brand": "서울우유", "variant": "나100%", "size": "1L", "count": 1,
+   "name": "서울우유 나100% 1L",
+   "links": [{"mall": "쿠팡", "url": ""}, {"mall": "네이버", "url": ""}]},
+  {"item": "햇반", "brand": "CJ", "variant": "백미밥", "size": "210g", "count": 12,
+   "name": "CJ 햇반 백미밥 210g x 12개",
+   "links": [{"mall": "쿠팡", "url": ""}, {"mall": "네이버", "url": ""}]},
+  {"item": "햇반", "brand": "CJ", "variant": "백미밥", "size": "210g", "count": 24,
+   "name": "CJ 햇반 백미밥 210g x 24개",
+   "links": [{"mall": "쿠팡", "url": ""}]},
+  {"item": "햇반", "brand": "CJ", "variant": "현미밥", "size": "210g", "count": 12,
+   "name": "CJ 햇반 현미밥 210g x 12개",
+   "links": [{"mall": "쿠팡", "url": ""}]}
+]
