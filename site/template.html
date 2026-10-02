@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>딱 맞는 규격 찾기</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --text:#1c1f24; --muted:#6b7280; --line:#d9dde3; --accent:#e5322d; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --card:#1d2025; --text:#eceef1; --muted:#9aa1ad; --line:#333841; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 48px; }
+  h1 { font-size:28px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 24px; }
+  .picker { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; }
+  label { display:block; font-size:13px; color:var(--muted); margin-bottom:4px; }
+  select { width:100%; padding:10px; font-size:16px; background:var(--card); color:var(--text); border:1px solid var(--line); border-radius:6px; }
+  select:disabled { opacity:.45; }
+  .reset { margin-top:12px; background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:14px; padding:0; }
+  .result { margin-top:28px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px; }
+  .result h2 { font-size:20px; margin:0 0 4px; }
+  .spec { color:var(--muted); margin:0 0 16px; }
+  .links { display:flex; flex-wrap:wrap; gap:10px; }
+  .links a, .links span { padding:12px 20px; border-radius:6px; font-weight:700; text-decoration:none; }
+  .links a { background:var(--accent); color:#fff; }
+  .links span { border:1px dashed var(--line); color:var(--muted); font-weight:400; }
+  .hint { margin-top:28px; color:var(--muted); }
+  footer { margin-top:40px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); padding-top:16px; }
+  [hidden] { display:none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>딱 맞는 규격 찾기</h1>
+  <p class="sub">원하는 규격만 골라서 바로 구매 링크를 확인하세요. 다른 용량은 나오지 않습니다.</p>
+  <div class="picker" id="picker"></div>
+  <button class="reset" id="reset" type="button" hidden>처음부터 다시</button>
+  <div class="hint" id="hint">위에서 순서대로 선택해 주세요.</div>
+  <section class="result" id="result" hidden></section>
+  <footer>
+    이 사이트는 쿠팡 파트너스 활동 및 네이버 쇼핑 커넥트 활동의 일환으로, 구매 시 일정액의 수수료를 제공받습니다.
+    가격과 재고는 판매처에서 직접 확인해 주세요.
+  </footer>
+</main>
+<script>
+const PRODUCTS = __CATALOG__;
+const LEVELS = [
+  { key: "item", label: "품목" },
+  { key: "brand", label: "제조사" },
+  { key: "variant", label: "제품" },
+  { key: "size", label: "규격" },
+  { key: "count", label: "개수" },
+];
+const picks = {};
+
+function candidates(upTo) {
+  return PRODUCTS.filter(p => LEVELS.slice(0, upTo).every(l => String(p[l.key]) === picks[l.key]));
+}
+
+function unique(list, key) {
+  return [...new Set(list.map(p => String(p[key])))];
+}
+
+function render() {
+  const picker = document.getElementById("picker");
+  picker.replaceChildren();
+  let ready = true;
+  LEVELS.forEach((lv, i) => {
+    const wrap = document.createElement("div");
+    const label = document.createElement("label");
+    label.textContent = lv.label;
+    const select = document.createElement("select");
+    const options = ready ? unique(candidates(i), lv.key) : [];
+    // 선택지가 하나뿐이면 자동으로 골라 준다.
+    if (ready && !picks[lv.key] && options.length === 1) picks[lv.key] = options[0];
+    select.disabled = !ready;
+    const blank = new Option("선택", "");
+    select.add(blank);
+    options.forEach(v => select.add(new Option(lv.key === "count" ? v + "개" : v, v)));
+    select.value = picks[lv.key] || "";
+    select.addEventListener("change", () => {
+      LEVELS.slice(i).forEach(l => delete picks[l.key]);
+      if (select.value) picks[lv.key] = select.value;
+      render();
+    });
+    if (!picks[lv.key]) ready = false;
+    label.append(select);
+    wrap.append(label);
+    picker.append(wrap);
+  });
+  showResult();
+}
+
+function showResult() {
+  const box = document.getElementById("result");
+  const hint = document.getElementById("hint");
+  const found = candidates(LEVELS.length)[0];
+  document.getElementById("reset").hidden = !Object.keys(picks).length;
+  box.hidden = hint.hidden = true;
+  if (!found) { hint.hidden = false; return; }
+  box.replaceChildren();
+  const h2 = document.createElement("h2");
+  h2.textContent = found.name;
+  const spec = document.createElement("p");
+  spec.className = "spec";
+  spec.textContent = "규격 " + found.size + " · " + found.count + "개";
+  const links = document.createElement("div");
+  links.className = "links";
+  found.links.forEach(l => {
+    if (l.url && l.url.startsWith("https://")) {
+      const a = document.createElement("a");
+      a.href = l.url;
+      a.rel = "sponsored noopener";
+      a.target = "_blank";
+      a.textContent = l.mall + "에서 보기";
+      links.append(a);
+    } else {
+      const s = document.createElement("span");
+      s.textContent = l.mall + " 링크 준비 중";
+      links.append(s);
+    }
+  });
+  box.append(h2, spec, links);
+  box.hidden = false;
+}
+
+document.getElementById("reset").addEventListener("click", () => {
+  Object.keys(picks).forEach(k => delete picks[k]);
+  render();
+});
+render();
+</script>
+</body>
+</html>

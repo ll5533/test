@@ -1,0 +1,20 @@
+[
+  {"mall": "쿠팡", "price": 2650, "title": "매일유업 매일 상하목장 유기농 우유 1L", "url": "https://example.com/c/1"},
+  {"mall": "네이버", "price": 2480, "title": "매일우유 오리지널 1,000ml", "url": "https://example.com/n/2"},
+  {"mall": "네이버", "price": 2390, "title": "매일우유 오리지널 1리터", "url": "https://example.com/n/3"},
+  {"mall": "쿠팡", "price": 1250, "title": "매일우유 오리지널 500ml", "url": "https://example.com/c/4"},
+  {"mall": "쿠팡", "price": 890, "title": "매일우유 오리지널 300ml", "url": "https://example.com/c/5"},
+  {"mall": "쿠팡", "price": 9900, "title": "매일우유 오리지널 250ml x 4개", "url": "https://example.com/c/6"},
+  {"mall": "네이버", "price": 4500, "title": "매일우유 오리지널 1000ml x 2개", "url": "https://example.com/n/7"},
+  {"mall": "네이버", "price": 4300, "title": "매일우유 오리지널 2 x 1L", "url": "https://example.com/n/8"},
+  {"mall": "쿠팡", "price": 2700, "title": "매일우유 오리지널 1L + 300ml 증정", "url": "https://example.com/c/9"},
+  {"mall": "네이버", "price": 2200, "title": "매일우유 오리지널 (500ml/1L 택1)", "url": "https://example.com/n/10"},
+  {"mall": "쿠팡", "price": 2100, "title": "서울우유 나100% 1L", "url": "https://example.com/c/11"},
+  {"mall": "쿠팡", "price": 14500, "title": "CJ 햇반 210g x 12개", "url": "https://example.com/c/12"},
+  {"mall": "네이버", "price": 13900, "title": "CJ제일제당 햇반 210g×12입", "url": "https://example.com/n/13"},
+  {"mall": "네이버", "price": 21800, "title": "CJ 햇반 210g x 18개", "url": "https://example.com/n/14"},
+  {"mall": "쿠팡", "price": 27500, "title": "CJ 햇반 210g x 24개", "url": "https://example.com/c/15"},
+  {"mall": "쿠팡", "price": 1650, "title": "CJ 햇반 130g 1개", "url": "https://example.com/c/16"},
+  {"mall": "네이버", "price": 15200, "title": "CJ 햇반 현미밥 210g x 12개", "url": "https://example.com/n/17"},
+  {"mall": "쿠팡", "price": 14000, "title": "CJ 햇반 210g 12개 / 1박스 24개 선택", "url": "https://example.com/c/18"}
+]
